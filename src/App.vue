@@ -1,8 +1,8 @@
 <template>
   <div>
-    <p>
+    <h2 class="clock">
       <span>{{ time }} </span>
-    </p>
+    </h2>
     <TheHeader />
     <BadgeList />
     <UserInfo
@@ -23,7 +23,7 @@ export default {
   data() {
     return {
       activeUser: {
-        name: "Maximilian Schwarzmüller",
+        name: "Mashu Maru",
         description: "Site owner and admin",
         role: "admin",
       },
@@ -53,11 +53,6 @@ export default {
         }
         return (this.time = hour + " : " + minutes + " : " + seconds);
       });
-      // var now = new Date();
-      // var hour = now.getHours();
-      // var minutes = now.getMinutes();
-      // var seconds = now.getSeconds();
-      // return (this.hour = hour + " : " + minutes + " : " + seconds);
     },
   },
   mounted: function() {
@@ -73,5 +68,9 @@ html {
 
 body {
   margin: 0;
+}
+
+.clock {
+  text-align: center;
 }
 </style>
