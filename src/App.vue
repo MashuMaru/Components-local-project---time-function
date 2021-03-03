@@ -1,9 +1,10 @@
 <template>
   <div>
-    <h2 class="clock">
-      <span>{{ time }} </span>
-    </h2>
-    <TheHeader />
+    <!-- <h2 class="clock">
+      <span> {{ time }} </span>
+    </h2> -->
+    <TheHeader 
+    v-bind:time="time"/>
     <BadgeList />
     <UserInfo
       :full-name="activeUser.name"
@@ -29,7 +30,6 @@ export default {
       },
       time: "",
       interval: 0,
-      // minutes: minutes,
     };
   },
   methods: {
