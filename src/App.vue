@@ -1,5 +1,8 @@
 <template>
   <div>
+    <p>
+      <span>{{ time }} </span>
+    </p>
     <TheHeader />
     <BadgeList />
     <UserInfo
@@ -7,9 +10,6 @@
       :info-text="activeUser.description"
       :role="activeUser.role"
     />
-    <p>
-      <span>{{ hour }} </span>
-    </p>
   </div>
 </template>
 
@@ -27,18 +27,31 @@ export default {
         description: "Site owner and admin",
         role: "admin",
       },
-      hour: "",
+      time: "",
+      interval: 0,
       // minutes: minutes,
     };
   },
   methods: {
     getHours() {
-      this.hour = setInterval(() => {
+      this.time = setInterval(() => {
         var now = new Date();
+        //hours
         var hour = now.getHours();
+        if (hour < 10) {
+          hour = "0" + hour;
+        }
+        //minutes
         var minutes = now.getMinutes();
+        if (minutes < 10) {
+          minutes = "0" + minutes;
+        }
+        //seconds
         var seconds = now.getSeconds();
-        return (this.hour = hour + " : " + minutes + " : " + seconds);
+        if (seconds < 10) {
+          seconds = "0" + seconds;
+        }
+        return (this.time = hour + " : " + minutes + " : " + seconds);
       });
       // var now = new Date();
       // var hour = now.getHours();
@@ -46,6 +59,9 @@ export default {
       // var seconds = now.getSeconds();
       // return (this.hour = hour + " : " + minutes + " : " + seconds);
     },
+  },
+  mounted: function() {
+    this.interval = setInterval(this.getHours(), 1000);
   },
 };
 </script>
