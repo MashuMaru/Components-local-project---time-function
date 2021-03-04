@@ -7,7 +7,9 @@
 
 <script>
 export default {
-  props: ["time"],
+  props: {
+    time: String
+  }
 }
 </script>
 

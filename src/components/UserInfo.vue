@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import BaseBadge from "./BaseBadge";
+import BaseBadge from "./UI/BaseBadge";
 export default {
   components: { BaseBadge },
   props: ["fullName", "infoText", "role"],
