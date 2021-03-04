@@ -1,28 +1,33 @@
 <template>
   <div>
-    <!-- <h2 class="clock">
-      <span> {{ time }} </span>
-    </h2> -->
-    <TheHeader 
-    v-bind:time="time"/>
-    <BadgeList />
-    <UserInfo
-      :full-name="activeUser.name"
-      :info-text="activeUser.description"
-      :role="activeUser.role"
-    />
+    <TheHeader v-bind:time="time" />
+    <button v-on:click="setSelectedComponent('active-goals')">
+      Active goals
+    </button>
+    <button v-on:click="setSelectedComponent('manage-goals')">
+      Manage goals
+    </button>
+    <!-- <ActiveGoals v-if="selectedComponent === 'active-goals'"/>
+    <ManageGoals v-if="selectedComponent === 'manage-goals'"/> -->
+    <keep-alive>
+      <component v-bind:is="selectedComponent"></component>
+    </keep-alive>
   </div>
 </template>
 
 <script>
-import TheHeader from "./components/TheHeader";
-import BadgeList from "./components/BadgeList";
-import UserInfo from "./components/UserInfo";
+import TheHeader from "./components/TheHeader.vue";
+// import BadgeList from "./components/BadgeList.vue";
+// import UserInfo from "./components/UserInfo.vue";
+// import CourseGoals from "./components/CourseGoals.vue";
+import ActiveGoals from "./components/ActiveGoals.vue";
+import ManageGoals from "./components/ManageGoals.vue";
 
 export default {
-  components: { TheHeader, BadgeList, UserInfo },
+  components: { TheHeader, ActiveGoals, ManageGoals },
   data() {
     return {
+      selectedComponent: "active-goals",
       activeUser: {
         name: "Mashu Maru",
         description: "Site owner and admin",
@@ -33,20 +38,20 @@ export default {
     };
   },
   methods: {
-    getHours() {
+    setSelectedComponent(active) {
+      this.selectedComponent = active;
+    },
+    getTime() {
       this.time = setInterval(() => {
         var now = new Date();
-        //hours
         var hour = now.getHours();
         if (hour < 10) {
           hour = "0" + hour;
         }
-        //minutes
         var minutes = now.getMinutes();
         if (minutes < 10) {
           minutes = "0" + minutes;
         }
-        //seconds
         var seconds = now.getSeconds();
         if (seconds < 10) {
           seconds = "0" + seconds;
@@ -56,7 +61,7 @@ export default {
     },
   },
   mounted: function() {
-    this.interval = setInterval(this.getHours(), 1000);
+    this.interval = setInterval(this.getTime(), 1000);
   },
 };
 </script>

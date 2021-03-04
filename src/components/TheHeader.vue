@@ -11,7 +11,11 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+html {
+  font-family: sans-serif;
+}
+
   header {
     width: 100%;
     height: 100px;
